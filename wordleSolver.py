@@ -17,7 +17,7 @@ def main():
         if check:
             print("Algorithm was correct, answer was ", final)
             return
-        notin, used, corr = [], {}, {}
+        notin, used, corr = set(), {}, {}
         i = 0
         j = 0
         lc = 0
@@ -26,16 +26,20 @@ def main():
                 corr[response[i + 1].lower()] = lc
                 i += 2
             elif response[i].islower():
-                notin.append(response[i].lower())
+                notin.add(response[i].lower())
             else:
                 used[response[i].lower()] = lc
             i += 1
             lc += 1
-        for c in notin:
-            if c in corr or c in used:
+
+        for c in used:
+            if c in notin :
+                notin.remove(c)
+        for c in corr:
+            if c in notin :
                 notin.remove(c)
 
-        # print(notin, used, corr)
+        print(notin, used, corr)
 
         for c in used:
             bank = bank[bank['words'].str.contains(c, na=False)].dropna()
