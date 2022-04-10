@@ -16,7 +16,7 @@ def main():
     for i in range(5):
         if check:
             print("Algorithm was correct, answer was ", final)
-            return
+            return True
         notin, used, corr = set(), {}, {}
         i = 0
         j = 0
@@ -39,7 +39,7 @@ def main():
             if c in notin :
                 notin.remove(c)
 
-        print(notin, used, corr)
+        # print(notin, used, corr)
 
         for c in used:
             bank = bank[bank['words'].str.contains(c, na=False)].dropna()
@@ -66,9 +66,10 @@ def main():
 
     if check:
         print("Algorithm was correct, answer was ", final)
+        return True
     else:
         print("Algorithm was not correct, correct answer was ", final)
-    return
+        return False
 
 
 if __name__ == '__main__':
